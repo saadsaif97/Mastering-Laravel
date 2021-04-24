@@ -1,8 +1,7 @@
-@extends('../layouts/master')
-@section('title', 'todo')
+@extends('layouts.app')
 
 @section('content')
-<div class="container py-5">
+<div class="container">
    <div class="d-flex justify-content-between align-items-center">
       <h1>Todo</h1>
       <a href="/todo/create" class="btn btn-outline-info">Add new todo</a>

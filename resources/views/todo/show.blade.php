@@ -1,9 +1,8 @@
-@extends('../layouts/master')
-@section('title', 'todo')
+@extends('layouts.app')
 
 @section('content')
-<div class="container py-5">
-   <a href="/todo">← Go back</a>
+<div class="container">
+   <a href="/todo">← Todo List</a>
    <h1>{{ $todo->title }}</h1>
    <span class="badge badge-danger">{{ $todo->due }}</span>
    <hr>

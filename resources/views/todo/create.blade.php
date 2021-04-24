@@ -1,8 +1,7 @@
-@extends('../layouts/master')
-@section('title', 'create todo')
+@extends('layouts.app')
 
 @section('content')
-<div class="container py-5">
+<div class="container">
    <h1>Create Todo</h1>
    <hr>
    <form action="/todo" method="POST">

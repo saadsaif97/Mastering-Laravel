@@ -1,8 +1,7 @@
-@extends('../layouts/master')
-@section('title', 'contact')
+@extends('layouts.app')
 
 @section('content')
-<div class="container py-5">
+<div class="container">
    <h1>Contact</h1>
 </div>
 @stop
