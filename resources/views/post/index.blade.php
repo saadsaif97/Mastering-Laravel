@@ -1,8 +1,8 @@
 @extends('../layouts/master')
 @section('title', 'posts')
 
-@section('posts')
-<div>
+@section('content')
+<div class="container py-5">
    <h1>Posts</h1>
    <hr />
    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#createModal">Create new post</button>

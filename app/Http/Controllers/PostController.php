@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Post as ModelsPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -14,18 +15,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+
+        $posts = DB::table('posts')->get();
+        return view('post.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -35,51 +30,62 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'title' => 'required|max:100|unique:posts,title',
+        ],[
+            'title.required' => 'To create, please provide title',
+            'title.unique' => 'To create, please provide title that is unique',
+            'title.max' => 'To create, please provide title that is shorter than 100 charecters',
+        ]);
+
+        ModelsPost::create($data);
+
+        return redirect('/post');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
+        $post = DB::table('posts')->where('id','=',$id)->get();
+        return $post;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $data = request()->validate([
+            'title' => 'required|max:100|unique:posts,title',
+        ],[
+            'title.required' => 'To edit, please provide title',
+            'title.unique' => 'To edit, please provide title that is unique',
+            'title.max' => 'To edit, please provide title that is shorter than 100 charecters',
+        ]);
+
+        DB::table('posts')->where('id',$id)->update($data);
+
+        return redirect('/post');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        DB::table('posts')->delete($id);
+        return back();
     }
 }

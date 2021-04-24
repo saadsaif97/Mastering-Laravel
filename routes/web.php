@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Post;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/about', function () {
+    return view('about');
 });
 
-Route::resource('/post', Post::class);
+
+Route::resource('/post', PostController::class);
+Route::resource('/todo', TodoController::class);
